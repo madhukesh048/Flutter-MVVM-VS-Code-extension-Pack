@@ -10,7 +10,8 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:extension.createViews"
+		"onCommand:extension.createViews",
+		"onCommand:extension.initiliseArchitecture"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -18,6 +19,10 @@
 			{
 				"command": "extension.createViews",
 				"title": "Create Views"
+			},
+			{
+				"command": "extension.initiliseArchitecture",
+				"title": "Initilise Architecture"
 			}
 		]
 	},

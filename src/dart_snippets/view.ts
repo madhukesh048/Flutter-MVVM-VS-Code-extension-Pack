@@ -12,7 +12,7 @@ export class View extends Base {
     let classPrefix: string | undefined;
     if (!_.isEmpty(classPrefixList)) { classPrefix = _.first(classPrefixList); }
 
-    this._dartString = `library ${fileName};
+    this._dartString = `library ${fileName}_view;
 
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:flutter/material.dart';
