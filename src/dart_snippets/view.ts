@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import {Base} from './base';
+import { Base } from './base';
 
 export class View extends Base {
 
@@ -8,26 +8,29 @@ export class View extends Base {
   constructor(fileName: string, suffix: string) {
     super(fileName, suffix);
 
-    this._dartString = `import 'package:flutter/material.dart';
-import '${_.snakeCase(this.className)}_model.dart';
+    let classPrefixList: string[] = this.className.split('View');
+    let classPrefix: string | undefined;
+    if (!_.isEmpty(classPrefixList)) { classPrefix = _.first(classPrefixList); }
+
+    this._dartString = `library ${fileName};
+
+import 'package:responsive_builder/responsive_builder.dart';
+import 'package:flutter/material.dart';
+
+part '${fileName}_mobile.dart';
+part '${fileName}_tablet.dart';
+part '${fileName}_desktop.dart';
 
 class ${this.className} extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    ${this.className}Model viewModel = ${this.className}Model();
-    return BaseView<${this.className}Model>(
-      viewModel: viewModel,
-      builder: (context, viewModel, _) => _getView(context, viewModel),
-      onModelReady: (viewModel) {
-        // Do something once the view model has loaded
-      }
+    return Scaffold(
+      body: ScreenTypeLayout(
+        mobile: _${classPrefix}Mobile(),
+        desktop: _${classPrefix}Desktop(),
+        tablet: _${classPrefix}Tablet(),
+      ),
     );
-  }
-
-  /// Generate your view here. You can access your business components
-  /// by accessing the [viewModel]
-  Widget _getView(BuildContext context, ${this.className}Model viewModel) {
-    return Container();
   }
 }`;
   }

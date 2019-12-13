@@ -2,21 +2,23 @@ import * as _ from "lodash";
 import { Base } from "./base";
 
 export class ViewModel extends Base {
-  private _dartString: string;
+    private _dartString: string;
 
-  constructor(fileName: string, suffix: string) {
+    constructor(fileName: string, suffix: string) {
 
-    super(fileName, suffix);
+        super(fileName, suffix);
 
-    this._dartString = `
+        this._dartString = `import '../../core/base/base_view_model.dart';
+
 class ${this.className} extends BaseViewModel {
+
   ${this.className}();
   
-  // Add you business logic here
+  // Add ViewModel specific code here
 }`;
-  }
+    }
 
-  get dartString(): string {
-    return this._dartString;
-  }
+    get dartString(): string {
+        return this._dartString;
+    }
 }
