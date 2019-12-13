@@ -7,6 +7,8 @@ import { Utils } from './utils';
 import { View } from './dart_snippets/view';
 import { ViewModel } from './dart_snippets/view_model';
 import { Mobile } from './dart_snippets/mobile';
+import { Desktop } from './dart_snippets/desktop';
+import { Tablet } from './dart_snippets/tablet';
 
 export function activate(context: vscode.ExtensionContext) {
 	let disposable = vscode.commands.registerCommand('extension.createViews', async () => {
@@ -98,14 +100,14 @@ function createFiles(fileName: string) {
 		showError(`${fileName}_view.dart already exists`);
 		return;
 	}
-	// createViewFile(pathValue, fileName);
+	createDesktopFile(pathValue, fileName);
 	if (
 		fs.existsSync(path.join(pathValue, _.snakeCase(fileName) + "_tablet.dart"))
 	) {
 		showError(`${fileName}_view.dart already exists`);
 		return;
 	}
-	// createViewFile(pathValue, fileName);
+	createTabletFile(pathValue, fileName);
 }
 
 function createViewFile(pathValue: string, fileName: string) {
@@ -114,13 +116,23 @@ function createViewFile(pathValue: string, fileName: string) {
 	Utils.openFile(filePath);
 }
 function createViewModelFile(pathValue: string, fileName: string) {
-	let filePath = path.join(pathValue,_.snakeCase(fileName) + "_view_model.dart");
+	let filePath = path.join(pathValue, _.snakeCase(fileName) + "_view_model.dart");
 	fs.writeFileSync(filePath, new ViewModel(fileName, 'ViewModel').dartString);
 	Utils.openFile(filePath);
 }
 function createMobileFile(pathValue: string, fileName: string) {
-	let filePath = path.join(pathValue,_.snakeCase(fileName) + "_mobile.dart");
+	let filePath = path.join(pathValue, _.snakeCase(fileName) + "_mobile.dart");
 	fs.writeFileSync(filePath, new Mobile(fileName, 'Mobile').dartString);
+	Utils.openFile(filePath);
+}
+function createDesktopFile(pathValue: string, fileName: string) {
+	let filePath = path.join(pathValue, _.snakeCase(fileName) + "_desktop.dart");
+	fs.writeFileSync(filePath, new Desktop(fileName, 'Desktop').dartString);
+	Utils.openFile(filePath);
+}
+function createTabletFile(pathValue: string, fileName: string) {
+	let filePath = path.join(pathValue, _.snakeCase(fileName) + "_tablet.dart");
+	fs.writeFileSync(filePath, new Tablet(fileName, 'Tablet').dartString);
 	Utils.openFile(filePath);
 }
 
