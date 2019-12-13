@@ -120,7 +120,7 @@ function createViewModelFile(pathValue: string, fileName: string) {
 }
 function createMobileFile(pathValue: string, fileName: string) {
 	let filePath = path.join(pathValue,_.snakeCase(fileName) + "_mobile.dart");
-	fs.writeFileSync(filePath, new Mobile(fileName, 'ViewModel').dartString);
+	fs.writeFileSync(filePath, new Mobile(fileName, 'Mobile').dartString);
 	Utils.openFile(filePath);
 }
 
