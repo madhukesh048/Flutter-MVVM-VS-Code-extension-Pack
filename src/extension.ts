@@ -17,29 +17,32 @@ import { Locator } from './dart_snippets/locator';
 import { Logger } from './dart_snippets/logger';
 import { Providers } from './dart_snippets/providers';
 import { Main } from './dart_snippets/main';
+import { Architecture } from './initialize_architecture';
 
 export function activate(context: vscode.ExtensionContext) {
 
-	let dispose = vscode.commands.registerCommand('extension.initiliseArchitecture', async () => {
-		vscode.window.showInformationMessage('Hello World!');
-		createFolders();
+	let initializeDisposable = vscode.commands.registerCommand('extension.initilizeArchitecture', async () => {
+		vscode.window.showInformationMessage('Initializing Architecture Components');
+		
+		let rootPath = vscode.workspace.rootPath;
+		if (_.isUndefined(rootPath)) { return; }
+		new Architecture(path.join(rootPath, 'lib')).init();
 	});
-	context.subscriptions.push(dispose);
 
-
-	let disposable = vscode.commands.registerCommand('extension.createViews', async () => {
+	let viewDisposable = vscode.commands.registerCommand('extension.createViews', async () => {
 		let inputString = await getInputString();
 		if (inputString.length === 0) {
 			console.warn("activate: inputString length is 0");
 			showError("Invalid name for file");
 			return;
 		}
-		let fileName = processFileName(inputString);
+		let fileName = Utils.processFileName(inputString);
 		console.log(`activate: fileName: ${fileName}`);
-		vscode.window.showInformationMessage(fileName);
 		createFiles(fileName);
 	});
-	context.subscriptions.push(disposable);
+
+	context.subscriptions.push(viewDisposable);
+	context.subscriptions.push(initializeDisposable);
 }
 
 
@@ -49,215 +52,6 @@ async function getInputString(): Promise<string> {
 		return "";
 	}
 	return input;
-}
-
-
-function processFileName(fileName: string): string {
-	console.log(`processFilename: fileName:${fileName}`);
-	if (fileName.length < 4) {
-		return fileName;
-	}
-	let lastFileName = fileName
-		.substring(fileName.length - 4, fileName.length)
-		.toLowerCase();
-
-	if (lastFileName === "view") {
-		let truncatedFileName = fileName.substring(0, fileName.length - 4);
-		return truncatedFileName;
-	}
-
-	return fileName;
-}
-
-function createFolders() {
-	let rootPath = vscode.workspace.rootPath;
-	if (rootPath === undefined) {
-		return;
-	}
-	let basePath = path.join(
-		rootPath,
-		"lib",
-		"core",
-		"base",
-	);
-	console.log(`createFolders: basePath: ${basePath}`);
-
-	if (!fs.existsSync(basePath)) {
-		try {
-			shell.mkdir("-p", basePath);
-		} catch (error) {
-			console.error(error);
-		}
-		console.log('done');
-	}
-	if (
-		fs.existsSync(path.join(basePath, 'base_model.dart'))
-	) {
-		showError(`base_model.dart already exists`);
-		return;
-	}
-	createBaseModelFile(basePath, 'base_model.dart');
-	if (
-		fs.existsSync(path.join(basePath, 'base_service.dart'))
-	) {
-		showError(`base_service.dart already exists`);
-		return;
-	}
-	createBaseServiceFile(basePath, 'base_service.dart');
-	if (
-		fs.existsSync(path.join(basePath, 'base_view_model.dart'))
-	) {
-		showError(`base_view_model.dart already exists`);
-		return;
-	}
-	createBaseViewModelFile(basePath, 'base_view_model.dart');
-
-	let modelsPath = path.join(
-		rootPath,
-		"lib",
-		"core",
-		"models",
-	);
-	console.log(`createFolders: modelsPath: ${modelsPath}`);
-
-	if (!fs.existsSync(modelsPath)) {
-		try {
-			shell.mkdir("-p", modelsPath);
-		} catch (error) {
-			console.error(error);
-		}
-		console.log('done');
-	}
-
-	let servicesPath = path.join(
-		rootPath,
-		"lib",
-		"core",
-		"services",
-	);
-	console.log(`createFolders: servicesPath: ${servicesPath}`);
-
-	if (!fs.existsSync(servicesPath)) {
-		try {
-			shell.mkdir("-p", servicesPath);
-		} catch (error) {
-			console.error(error);
-		}
-		console.log('done');
-	}
-	if (
-		fs.existsSync(path.join(servicesPath, 'navigator_service.dart'))
-	) {
-		showError(`navigator_service.dart already exists`);
-		return;
-	}
-	createNavigatorServiceFile(servicesPath, 'navigator_service.dart');
-
-
-	let localPath = path.join(
-		rootPath,
-		"lib",
-		"core"
-	);
-	console.log(`createLocalfiles: localPath: ${localPath}`);
-
-	if (!fs.existsSync(localPath)) {
-		try {
-			shell.mkdir("-p", localPath);
-		} catch (error) {
-			console.error(error);
-		}
-		console.log('done');
-	}
-	if (
-		fs.existsSync(path.join(localPath, 'locator.dart'))
-	) {
-		showError(`locator.dart already exists`);
-		return;
-	}
-	createLocatorFile(localPath, 'locator.dart');
-
-	if (
-		fs.existsSync(path.join(localPath, 'logger.dart'))
-	) {
-		showError(`logger.dart already exists`);
-		return;
-	}
-	createLoggerFile(localPath, 'logger.dart');
-
-	if (
-		fs.existsSync(path.join(localPath, 'providers.dart'))
-	) {
-		showError(`providers.dart already exists`);
-		return;
-	}
-	createProvidersFile(localPath, 'providers.dart');
-
-	let themePath = path.join(
-		rootPath,
-		"lib",
-		"theme"
-	);
-	console.log(`createFolders: themePath: ${themePath}`);
-
-	if (!fs.existsSync(themePath)) {
-		try {
-			shell.mkdir("-p", themePath);
-		} catch (error) {
-			console.error(error);
-		}
-		console.log('done');
-	}
-
-	let viewsPath = path.join(
-		rootPath,
-		"lib",
-		"views"
-	);
-	console.log(`createFolders: viewsPath: ${viewsPath}`);
-
-	if (!fs.existsSync(viewsPath)) {
-		try {
-			shell.mkdir("-p", viewsPath);
-		} catch (error) {
-			console.error(error);
-		}
-		console.log('done');
-	}
-
-	let widgetsPath = path.join(
-		rootPath,
-		"lib",
-		"widgets"
-	);
-	console.log(`createFolders: widgetsPath: ${widgetsPath}`);
-
-	if (!fs.existsSync(widgetsPath)) {
-		try {
-			shell.mkdir("-p", widgetsPath);
-		} catch (error) {
-			console.error(error);
-		}
-		console.log('done');
-	}
-
-	let mainDartPath = path.join(
-		rootPath,
-		"lib"
-	);
-	console.log(`createFolders: mainDartPath: ${mainDartPath}`);
-
-	if (!fs.existsSync(mainDartPath)) {
-		try {
-			shell.mkdir("-p", mainDartPath);
-		} catch (error) {
-			console.error(error);
-		}
-		console.log('done');
-	}
-
-	createMainFile(mainDartPath, 'main.dart');
-
 }
 
 function createFiles(fileName: string) {
@@ -360,7 +154,7 @@ function createProvidersFile(pathValue: string, fileName: string) {
 
 function createMainFile(pathValue: string, fileName: string) {
 	let filePath = path.join(pathValue, 'main.dart');
-	fs.writeFileSync(filePath, new Main(fileName, 'Main').dartString,{encoding:'utf8',flag:'w'});
+	fs.writeFileSync(filePath, new Main(fileName, 'Main').dartString, { encoding: 'utf8', flag: 'w' });
 	Utils.openFile(filePath);
 }
 

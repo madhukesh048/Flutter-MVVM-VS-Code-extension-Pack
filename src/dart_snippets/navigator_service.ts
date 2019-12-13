@@ -5,7 +5,7 @@ export class NavigatorService extends Base {
 
   private _dartString: string;
 
-  constructor(fileName: string, suffix: string) {
+  constructor(fileName: string, suffix?: string) {
     super(fileName, suffix);
 
     this._dartString = `import '../../core/base/base_service.dart';

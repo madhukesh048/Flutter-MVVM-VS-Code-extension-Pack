@@ -11,7 +11,7 @@
 	],
 	"activationEvents": [
 		"onCommand:extension.createViews",
-		"onCommand:extension.initiliseArchitecture"
+		"onCommand:extension.initilizeArchitecture"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -21,7 +21,7 @@
 				"title": "Create Views"
 			},
 			{
-				"command": "extension.initiliseArchitecture",
+				"command": "extension.initilizeArchitecture",
 				"title": "Initilise Architecture"
 			}
 		]
@@ -42,7 +42,7 @@
 		"@types/vscode": "^1.41.0",
 		"glob": "^7.1.5",
 		"mocha": "^6.2.2",
-		"tslint": "^5.20.0",
+		"tslint": "^5.20.1",
 		"typescript": "^3.6.4",
 		"vscode-test": "^1.2.2"
 	},
