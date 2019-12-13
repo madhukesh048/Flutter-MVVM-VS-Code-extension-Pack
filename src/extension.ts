@@ -6,6 +6,7 @@ import * as shell from "shelljs";
 import { Utils } from './utils';
 import { View } from './dart_snippets/view';
 import { ViewModel } from './dart_snippets/view_model';
+import { Mobile } from './dart_snippets/mobile';
 
 export function activate(context: vscode.ExtensionContext) {
 	let disposable = vscode.commands.registerCommand('extension.createViews', async () => {
@@ -90,7 +91,7 @@ function createFiles(fileName: string) {
 		showError(`${fileName}_view.dart already exists`);
 		return;
 	}
-	// createViewFile(pathValue, fileName);
+	createMobileFile(pathValue, fileName);
 	if (
 		fs.existsSync(path.join(pathValue, _.snakeCase(fileName) + "_desktop.dart"))
 	) {
@@ -113,11 +114,13 @@ function createViewFile(pathValue: string, fileName: string) {
 	Utils.openFile(filePath);
 }
 function createViewModelFile(pathValue: string, fileName: string) {
-	let filePath = path.join(
-		pathValue,
-		_.snakeCase(fileName) + "_view_model.dart"
-	);
+	let filePath = path.join(pathValue,_.snakeCase(fileName) + "_view_model.dart");
 	fs.writeFileSync(filePath, new ViewModel(fileName, 'ViewModel').dartString);
+	Utils.openFile(filePath);
+}
+function createMobileFile(pathValue: string, fileName: string) {
+	let filePath = path.join(pathValue,_.snakeCase(fileName) + "_mobile.dart");
+	fs.writeFileSync(filePath, new Mobile(fileName, 'ViewModel').dartString);
 	Utils.openFile(filePath);
 }
 
