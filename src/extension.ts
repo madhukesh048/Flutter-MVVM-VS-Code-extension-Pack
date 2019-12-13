@@ -5,6 +5,7 @@ import * as fs from "fs";
 import * as shell from "shelljs";
 import { Utils } from './utils';
 import { View } from './dart_snippets/view';
+import { ViewModel } from './dart_snippets/view_model';
 
 export function activate(context: vscode.ExtensionContext) {
 	let disposable = vscode.commands.registerCommand('extension.createViews', async () => {
@@ -82,7 +83,7 @@ function createFiles(fileName: string) {
 		showError(`${fileName}_view_model.dart already exists`);
 		return;
 	}
-	// createViewModelFile(pathValue, fileName);
+	createViewModelFile(pathValue, fileName);
 	if (
 		fs.existsSync(path.join(pathValue, _.snakeCase(fileName) + "_mobile.dart"))
 	) {
@@ -109,6 +110,14 @@ function createFiles(fileName: string) {
 function createViewFile(pathValue: string, fileName: string) {
 	let filePath = path.join(pathValue, _.snakeCase(fileName) + "_view.dart");
 	fs.writeFileSync(filePath, new View(fileName, 'View').dartString);
+	Utils.openFile(filePath);
+}
+function createViewModelFile(pathValue: string, fileName: string) {
+	let filePath = path.join(
+		pathValue,
+		_.snakeCase(fileName) + "_view_model.dart"
+	);
+	fs.writeFileSync(filePath, new ViewModel(fileName, 'ViewModel').dartString);
 	Utils.openFile(filePath);
 }
 
