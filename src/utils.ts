@@ -25,4 +25,21 @@ export class Utils {
             vscode.window.showTextDocument(document);
         });
     }
+
+    public static processFileName(fileName: string): string {
+        console.log(`processFilename: fileName:${fileName}`);
+        if (fileName.length < 4) {
+            return fileName;
+        }
+        let lastFileName = fileName
+            .substring(fileName.length - 4, fileName.length)
+            .toLowerCase();
+    
+        if (lastFileName === "view") {
+            let truncatedFileName = fileName.substring(0, fileName.length - 4);
+            return truncatedFileName;
+        }
+    
+        return fileName;
+    }
 }

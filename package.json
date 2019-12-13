@@ -1,53 +1,55 @@
 {
-	"name": "flutter-responsive-views-generator",
-	"displayName": "Flutter-Responsive-Views-Generator",
-	"description": "",
-	"version": "0.0.1",
-	"engines": {
-		"vscode": "^1.41.0"
-	},
-	"categories": [
-		"Other"
-	],
-	"activationEvents": [
-		"onCommand:extension.createViews",
-		"onCommand:extension.initiliseArchitecture"
-	],
-	"main": "./out/extension.js",
-	"contributes": {
-		"commands": [
-			{
-				"command": "extension.createViews",
-				"title": "Create Views"
-			},
-			{
-				"command": "extension.initiliseArchitecture",
-				"title": "Initilise Architecture"
-			}
-		]
-	},
-	"scripts": {
-		"vscode:prepublish": "npm run compile",
-		"compile": "tsc -p ./",
-		"watch": "tsc -watch -p ./",
-		"pretest": "npm run compile",
-		"test": "node ./out/test/runTest.js"
-	},
-	"devDependencies": {
-		"@types/glob": "^7.1.1",
-		"@types/lodash": "^4.14.149",
-		"@types/mocha": "^5.2.7",
-		"@types/node": "^12.11.7",
-		"@types/shelljs": "^0.8.6",
-		"@types/vscode": "^1.41.0",
-		"glob": "^7.1.5",
-		"mocha": "^6.2.2",
-		"tslint": "^5.20.0",
-		"typescript": "^3.6.4",
-		"vscode-test": "^1.2.2"
-	},
-	"dependencies": {
-		"lodash": "^4.17.15",
-		"shelljs": "^0.8.3"
-	}
+  "name": "flutter-responsive-views-generator",
+  "displayName": "Flutter-Responsive-Views-Generator",
+  "description": "",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.41.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:extension.createViews",
+    "onCommand:extension.initilizeArchitecture"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "extension.createViews",
+        "title": "Create Views",
+        "category": "Flutter Architecture"
+      },
+      {
+        "command": "extension.initilizeArchitecture",
+        "title": "Initilize Architecture",
+        "category": "Flutter Architecture"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.1.1",
+    "@types/lodash": "^4.14.149",
+    "@types/mocha": "^5.2.7",
+    "@types/node": "^12.11.7",
+    "@types/shelljs": "^0.8.6",
+    "@types/vscode": "^1.41.0",
+    "glob": "^7.1.5",
+    "mocha": "^6.2.2",
+    "tslint": "^5.20.1",
+    "typescript": "^3.6.4",
+    "vscode-test": "^1.2.2"
+  },
+  "dependencies": {
+    "lodash": "^4.17.15",
+    "shelljs": "^0.8.3"
+  }
 }

@@ -5,7 +5,7 @@ export class Logger extends Base {
 
   private _dartString: string;
 
-  constructor(fileName: string, suffix: string) {
+  constructor(fileName: string, suffix?: string) {
     super(fileName, suffix);
 
     this._dartString = `import 'dart:developer' as prefix0;
