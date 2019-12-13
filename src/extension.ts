@@ -1,6 +1,8 @@
 import * as vscode from 'vscode';
 import * as path from "path";
 import * as _ from "lodash";
+import * as fs from "fs";
+import * as shell from "shelljs";
 
 export function activate(context: vscode.ExtensionContext) {
 	let disposable = vscode.commands.registerCommand('extension.createViews', async () => {
@@ -52,11 +54,25 @@ function createFiles(fileName: string) {
 	let pathValue = path.join(
 		rootPath,
 		"lib",
-		"ui",
 		"views",
 		_.snakeCase(fileName)
 	);
 	console.log(`createFiles: pathValue: ${pathValue}`);
+
+	if (!fs.existsSync(pathValue)) {
+		try {
+			shell.mkdir("-p", pathValue);
+		} catch (error) {
+			console.error(error);
+		}
+		console.log('done');
+	}
+	if (
+		fs.existsSync(path.join(pathValue, _.snakeCase(fileName) + "_view.dart"))
+	) {
+		showError(`${fileName}_view.dart already exists`);
+		return;
+	}
 }
 
 function showError(message: string) {
