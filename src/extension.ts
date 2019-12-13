@@ -3,6 +3,8 @@ import * as path from "path";
 import * as _ from "lodash";
 import * as fs from "fs";
 import * as shell from "shelljs";
+import { Utils } from './utils';
+import { View } from './dart_snippets/view';
 
 export function activate(context: vscode.ExtensionContext) {
 	let disposable = vscode.commands.registerCommand('extension.createViews', async () => {
@@ -73,6 +75,41 @@ function createFiles(fileName: string) {
 		showError(`${fileName}_view.dart already exists`);
 		return;
 	}
+	createViewFile(pathValue, fileName);
+	if (
+		fs.existsSync(path.join(pathValue, _.snakeCase(fileName) + "_view_model.dart"))
+	) {
+		showError(`${fileName}_view_model.dart already exists`);
+		return;
+	}
+	// createViewModelFile(pathValue, fileName);
+	if (
+		fs.existsSync(path.join(pathValue, _.snakeCase(fileName) + "_mobile.dart"))
+	) {
+		showError(`${fileName}_view.dart already exists`);
+		return;
+	}
+	// createViewFile(pathValue, fileName);
+	if (
+		fs.existsSync(path.join(pathValue, _.snakeCase(fileName) + "_desktop.dart"))
+	) {
+		showError(`${fileName}_view.dart already exists`);
+		return;
+	}
+	// createViewFile(pathValue, fileName);
+	if (
+		fs.existsSync(path.join(pathValue, _.snakeCase(fileName) + "_tablet.dart"))
+	) {
+		showError(`${fileName}_view.dart already exists`);
+		return;
+	}
+	// createViewFile(pathValue, fileName);
+}
+
+function createViewFile(pathValue: string, fileName: string) {
+	let filePath = path.join(pathValue, _.snakeCase(fileName) + "_view.dart");
+	fs.writeFileSync(filePath, new View(fileName, 'View').dartString);
+	Utils.openFile(filePath);
 }
 
 function showError(message: string) {
