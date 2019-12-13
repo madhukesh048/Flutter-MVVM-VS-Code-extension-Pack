@@ -1,27 +1,66 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
+import * as path from "path";
+import * as _ from "lodash";
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
-
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "flutter-responsive-views-generator" is now active!');
-
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('extension.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
-
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World!');
+	let disposable = vscode.commands.registerCommand('extension.createViews', async () => {
+		let inputString = await getInputString();
+		if (inputString.length === 0) {
+			console.warn("activate: inputString length is 0");
+			showError("Invalid name for file");
+			return;
+		}
+		let fileName = processFileName(inputString);
+		console.log(`activate: fileName: ${fileName}`);
+		vscode.window.showInformationMessage(fileName);
+		createFiles(fileName);
 	});
-
 	context.subscriptions.push(disposable);
 }
 
-// this method is called when your extension is deactivated
-export function deactivate() {}
+
+async function getInputString(): Promise<string> {
+	let input = await vscode.window.showInputBox({ placeHolder: "Enter class name" });
+	if (input === undefined) {
+		return "";
+	}
+	return input;
+}
+
+
+function processFileName(fileName: string): string {
+	console.log(`processFilename: fileName:${fileName}`);
+	if (fileName.length < 4) {
+		return fileName;
+	}
+	let lastFileName = fileName
+		.substring(fileName.length - 4, fileName.length)
+		.toLowerCase();
+
+	if (lastFileName === "view") {
+		let truncatedFileName = fileName.substring(0, fileName.length - 4);
+		return truncatedFileName;
+	}
+
+	return fileName;
+}
+function createFiles(fileName: string) {
+	let rootPath = vscode.workspace.rootPath;
+	if (rootPath === undefined) {
+		return;
+	}
+	let pathValue = path.join(
+		rootPath,
+		"lib",
+		"ui",
+		"views",
+		_.snakeCase(fileName)
+	);
+	console.log(`createFiles: pathValue: ${pathValue}`);
+}
+
+function showError(message: string) {
+	vscode.window.showErrorMessage(message);
+}
+
+export function deactivate() { }
