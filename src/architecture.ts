@@ -1,8 +1,6 @@
 import * as path from 'path';
 import * as _ from "lodash";
-import * as fs from "fs";
-import * as shell from "shelljs";
-import { FileSystemManager } from './file_manager';
+import { FileSystemManager } from './file_system_manager';
 import { WriteFileOptions } from 'fs';
 import { BaseModel } from './dart_snippets/base_model';
 import { BaseService } from './dart_snippets/base_service';

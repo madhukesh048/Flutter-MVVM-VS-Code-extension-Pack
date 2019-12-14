@@ -37,9 +37,9 @@ export class Utils {
     
         if (lastFileName === "view") {
             let truncatedFileName = fileName.substring(0, fileName.length - 4);
-            return truncatedFileName;
+            return truncatedFileName.trim();
         }
     
-        return fileName;
+        return fileName.trim();
     }
 }
