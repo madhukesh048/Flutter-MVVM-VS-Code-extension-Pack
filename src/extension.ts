@@ -1,9 +1,9 @@
 import * as vscode from 'vscode';
 import * as path from "path";
 import * as _ from "lodash";
-import { Utils } from './utils';
-import { Architecture } from './architecture';
-import { ViewFile } from './view_file';
+import { Utils } from './utils/utils';
+import { Architecture } from './utils/architecture';
+import { ViewFile } from './utils/view_file';
 
 export function activate(context: vscode.ExtensionContext) {
 
