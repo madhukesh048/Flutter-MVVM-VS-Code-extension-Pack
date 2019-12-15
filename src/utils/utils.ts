@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+import _ = require('lodash');
 
 export class Utils {
     public static isValidClassName(className: string): string | undefined {
@@ -27,19 +28,21 @@ export class Utils {
     }
 
     public static processFileName(fileName: string): string {
-        console.log(`processFilename: fileName:${fileName}`);
+        
         if (fileName.length < 4) {
             return fileName;
         }
         let lastFileName = fileName
             .substring(fileName.length - 4, fileName.length)
             .toLowerCase();
-    
+
+        fileName = _.lowerCase(fileName);
+
         if (lastFileName === "view") {
             let truncatedFileName = fileName.substring(0, fileName.length - 4);
-            return truncatedFileName;
+            return truncatedFileName.trim();
         }
-    
-        return fileName;
+
+        return fileName.trim();
     }
 }
