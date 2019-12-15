@@ -18,9 +18,9 @@ export class ViewFile {
 
     public createResponsiveViews() {
         this.createFiles(this.snakeCasedFileName + '_view.dart', new View(this.fileName, 'View').dartString);
-        this.createMobile();        
-        this.createTablet();        
-        this.createDesktop();        
+        this.createMobile();
+        this.createTablet();
+        this.createDesktop();
     }
 
     public createView() {
@@ -44,7 +44,9 @@ export class ViewFile {
     }
 
     private get snakeCasedFileName(): string {
-        return _.snakeCase(this.fileName);
+        let snakeCasedFileName = _.snakeCase(this.fileName);
+        console.log(`get snakeCasedFileName: ${snakeCasedFileName}`);
+        return snakeCasedFileName;
     }
 
     private get pathValue(): string {
@@ -57,7 +59,7 @@ export class ViewFile {
     }
 
     private createFiles(fileName: string, data: string) {
-        if (existsSync(path.join(this.pathValue, fileName))) {
+        if (existsSync(path.join(this.pathValue, this.snakeCasedFileName))) {
             console.warn(`${fileName} already exists`);
             return;
         }
