@@ -37,7 +37,7 @@ export function activate(context: vscode.ExtensionContext) {
 		let fileName = Utils.processFileName(inputString.trim());
 		console.log(`activate: fileName: ${fileName}`);
 
-		let rootPath = vscode.workspace.rootPath;
+		let rootPath = VsCodeActions.rootPath;
 		if (rootPath === undefined) { return; }
 		new ViewFile(rootPath, fileName).createResponsiveViews();
 	});
