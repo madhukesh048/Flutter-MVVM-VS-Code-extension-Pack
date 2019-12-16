@@ -51,11 +51,11 @@
     "glob": "^7.1.5",
     "mocha": "^6.2.2",
     "tslint": "^5.20.1",
-    "typescript": "^3.6.4",
     "vscode-test": "^1.2.2"
   },
   "dependencies": {
     "lodash": "^4.17.15",
-    "shelljs": "^0.8.3"
+    "shelljs": "^0.8.3",
+    "typescript": "^3.7.3"
   }
 }

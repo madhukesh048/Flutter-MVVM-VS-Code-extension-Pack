@@ -5,6 +5,7 @@ import { Utils } from './utils/utils';
 import { Architecture } from './utils/architecture';
 import { ViewFile } from './utils/view_file';
 import { VsCodeActions } from './utils/vs_code_actions';
+import { WidgetFile } from './utils/widget_file';
 
 export function activate(context: vscode.ExtensionContext) {
 
@@ -45,7 +46,29 @@ export function activate(context: vscode.ExtensionContext) {
 
 
 	let widgetDisposable = vscode.commands.registerCommand('extension.createWidget', async () => {
-		vscode.window.showInformationMessage('Create Widget');
+
+		let inputString = await VsCodeActions.getInputString('Enter class name', async (value) => {
+			if (value.length === 0) {
+				return 'Enter class name';
+			}
+			if (value.toLowerCase() === 'widget') {
+				return 'Widget is not a valid class name';
+			}
+			return undefined;
+		});
+
+		if (inputString.length === 0 || inputString.toLowerCase() === 'widget') {
+			console.warn("activate: inputString length is 0");
+			showError("Invalid name for file");
+			return;
+		}
+
+		let fileName = Utils.processFileName(inputString.trim());
+		console.log(`activate: fileName: ${fileName}`);
+
+		let rootPath = VsCodeActions.rootPath;
+		if (rootPath === undefined) { return; }
+		new WidgetFile(rootPath, fileName).createResponsiveWidgets();
 	});
 
 	context.subscriptions.push(viewDisposable);

@@ -9,6 +9,11 @@ export class Utils {
         if (className.toLowerCase() === "view") {
             return "View is not a valid file name";
         }
+
+        if (className.toLowerCase() === "widget") {
+            return "Widget is not a valid file name";
+        }
+
         if (
             !className
                 .substring(0, 1)
@@ -28,10 +33,11 @@ export class Utils {
     }
 
     public static processFileName(fileName: string): string {
-        
+
         if (fileName.length < 4) {
             return fileName;
         }
+
         let lastFileName = fileName
             .substring(fileName.length - 4, fileName.length)
             .toLowerCase();
@@ -40,6 +46,12 @@ export class Utils {
 
         if (lastFileName === "view") {
             let truncatedFileName = fileName.substring(0, fileName.length - 4);
+            return truncatedFileName.trim();
+        }
+
+        if (lastFileName === "widget") {
+            let truncatedFileName = fileName.substring(0, fileName.length - 6);
+            console.log('Widget testing');
             return truncatedFileName.trim();
         }
 
