@@ -26,7 +26,7 @@ class MainApplication extends StatelessWidget {
         providers: ProviderInjector.providers,
         child: MaterialApp(
         navigatorKey: locator<NavigatorService>().navigatorKey,
-        home: ,
+        home: HomeView(),
         ),
     );
     }

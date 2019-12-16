@@ -21,6 +21,7 @@ export class ViewFile {
         this.createMobile();
         this.createTablet();
         this.createDesktop();
+        this.createWithViewModel();
     }
 
     public createView() {

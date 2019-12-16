@@ -2,15 +2,15 @@ import * as path from 'path';
 import * as _ from "lodash";
 import { FileSystemManager } from './file_system_manager';
 import { WriteFileOptions } from 'fs';
-import { BaseModel } from '../dart_snippets/base_model';
-import { BaseService } from '../dart_snippets/base_service';
-import { BaseViewModel } from '../dart_snippets/base_view_model';
+import { BaseModel } from '../dart_snippets/architecture/base_model';
+import { BaseService } from '../dart_snippets/architecture/base_service';
+import { BaseViewModel } from '../dart_snippets/architecture/base_view_model';
 import { Utils } from './utils';
-import { NavigatorService } from '../dart_snippets/navigator_service';
-import { Locator } from '../dart_snippets/locator';
-import { Logger } from '../dart_snippets/logger';
-import { Providers } from '../dart_snippets/providers';
-import { Main } from '../dart_snippets/main';
+import { NavigatorService } from '../dart_snippets/architecture/navigator_service';
+import { Locator } from '../dart_snippets/architecture/locator';
+import { Logger } from '../dart_snippets/architecture/logger';
+import { Providers } from '../dart_snippets/architecture/providers';
+import { Main } from '../dart_snippets/architecture/main';
 
 
 export class Architecture {

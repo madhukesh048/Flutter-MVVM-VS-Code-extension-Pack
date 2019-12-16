@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import { Base } from '../base';
+import { Base } from '../architecture/base';
 
 export class View extends Base {
 
