@@ -42,8 +42,15 @@ export function activate(context: vscode.ExtensionContext) {
 		new ViewFile(rootPath, fileName).createResponsiveViews();
 	});
 
+
+
+	let widgetDisposable = vscode.commands.registerCommand('extension.createWidget', async () => {
+		vscode.window.showInformationMessage('Create Widget');
+	});
+
 	context.subscriptions.push(viewDisposable);
 	context.subscriptions.push(initializeDisposable);
+	context.subscriptions.push(widgetDisposable);
 }
 
 function showError(message: string) {

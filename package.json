@@ -11,7 +11,8 @@
   ],
   "activationEvents": [
     "onCommand:extension.createViews",
-    "onCommand:extension.initilizeArchitecture"
+    "onCommand:extension.initilizeArchitecture",
+    "onCommand:extension.createWidget"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -24,6 +25,11 @@
       {
         "command": "extension.initilizeArchitecture",
         "title": "Initilize Architecture",
+        "category": "Flutter Architecture"
+      },
+      {
+        "command": "extension.createWidget",
+        "title": "Create Widgets",
         "category": "Flutter Architecture"
       }
     ]
