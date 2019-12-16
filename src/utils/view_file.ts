@@ -2,11 +2,11 @@ import * as path from 'path';
 import * as _ from 'lodash';
 import { existsSync } from 'fs';
 import { FileSystemManager } from './file_system_manager';
-import { View } from '../dart_snippets/view';
-import { ViewModel } from '../dart_snippets/view_model';
-import { Mobile } from '../dart_snippets/mobile';
-import { Desktop } from '../dart_snippets/desktop';
-import { Tablet } from '../dart_snippets/tablet';
+import { View } from '../dart_snippets/views/view';
+import { ViewModel } from '../dart_snippets/views/view_model';
+import { Mobile } from '../dart_snippets/views/mobile';
+import { Desktop } from '../dart_snippets/views/desktop';
+import { Tablet } from '../dart_snippets/views/tablet';
 
 export class ViewFile {
 

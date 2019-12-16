@@ -37,19 +37,24 @@ export class Utils {
         if (fileName.length < 4) {
             return fileName;
         }
+        fileName = _.lowerCase(fileName);
 
-        let lastFileName = fileName
+        let viewFileName = fileName
             .substring(fileName.length - 4, fileName.length)
             .toLowerCase();
 
-        fileName = _.lowerCase(fileName);
+        let widgetFileName = fileName
+            .substring(fileName.length - 6, fileName.length)
+            .toLowerCase();
 
-        if (lastFileName === "view") {
+
+
+        if (viewFileName === "view") {
             let truncatedFileName = fileName.substring(0, fileName.length - 4);
             return truncatedFileName.trim();
         }
 
-        if (lastFileName === "widget") {
+        if (widgetFileName === "widget") {
             let truncatedFileName = fileName.substring(0, fileName.length - 6);
             console.log('Widget testing');
             return truncatedFileName.trim();

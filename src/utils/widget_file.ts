@@ -2,11 +2,11 @@ import * as path from 'path';
 import * as _ from 'lodash';
 import { existsSync } from 'fs';
 import { FileSystemManager } from './file_system_manager';
-import { View } from '../dart_snippets/view';
-import { ViewModel } from '../dart_snippets/view_model';
-import { Mobile } from '../dart_snippets/mobile';
-import { Desktop } from '../dart_snippets/desktop';
-import { Tablet } from '../dart_snippets/tablet';
+import { ViewModel } from '../dart_snippets/widgets/view_model';
+import { Mobile } from '../dart_snippets/widgets/mobile';
+import { Desktop } from '../dart_snippets/widgets/desktop';
+import { Tablet } from '../dart_snippets/widgets/tablet';
+import { Widget } from '../dart_snippets/widgets/widget';
 
 export class WidgetFile {
 
@@ -17,7 +17,7 @@ export class WidgetFile {
     }
 
     public createResponsiveWidgets() {
-        this.createFiles(this.snakeCasedFileName + '_widget.dart', new View(this.fileName, 'View').dartString);
+        this.createFiles(this.snakeCasedFileName + '_widget.dart', new Widget(this.fileName, 'Widget').dartString);
         this.createMobile();
         this.createTablet();
         this.createDesktop();

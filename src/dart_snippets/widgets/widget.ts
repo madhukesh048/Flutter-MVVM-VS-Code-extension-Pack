@@ -1,18 +1,18 @@
 import * as _ from 'lodash';
-import { Base } from './base';
+import { Base } from '../base';
 
-export class View extends Base {
+export class Widget extends Base {
 
   private _dartString: string;
 
   constructor(fileName: string, suffix: string) {
     super(fileName, suffix);
 
-    let classPrefixList: string[] = this.className.split('View');
+    let classPrefixList: string[] = this.className.split('Widget');
     let classPrefix: string | undefined;
     if (!_.isEmpty(classPrefixList)) { classPrefix = _.first(classPrefixList); }
 
-    this._dartString = `library ${fileName}_view;
+    this._dartString = `library ${fileName}_widget;
 
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:flutter/material.dart';

@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
-import {Base} from './base';
+import { Base } from '../base';
 
-export class Desktop extends Base {
+export class Tablet extends Base {
 
   private _dartString: string;
 
@@ -14,7 +14,7 @@ class _${this.className} extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text('${fileName}_desktop'),
+      child: Text('${fileName}_tablet'),
     );
   }
 }`;
