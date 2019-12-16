@@ -11,11 +11,12 @@ import { Locator } from '../dart_snippets/architecture/locator';
 import { Logger } from '../dart_snippets/architecture/logger';
 import { Providers } from '../dart_snippets/architecture/providers';
 import { Main } from '../dart_snippets/architecture/main';
+import { Pubspec } from '../dart_snippets/architecture/pubspec';
 
 
 export class Architecture {
 
-    constructor(private rootPath: string) { }
+    constructor(private rootPath: string, private pubPath: string) { }
 
     public init() {
         this.initCore();
@@ -23,7 +24,10 @@ export class Architecture {
         this.initViews();
         this.initWidgets();
 
-        this.createFile(this.rootPath, 'main.dart', new Main('main.dart').dartString, {
+        this.createExistingFile(this.rootPath, 'main.dart', new Main('main.dart').dartString, {
+            encoding: 'utf8', flag: 'w'
+        });
+        this.createExistingFile(this.pubPath, 'pubspec.yaml', new Pubspec('pubspec.yaml').dartString, {
             encoding: 'utf8', flag: 'w'
         });
     }
@@ -89,6 +93,11 @@ export class Architecture {
             return;
         }
 
+        FileSystemManager.createFile(pathValue, fileName, data);
+        Utils.openFile(path.join(pathValue, fileName));
+    }
+
+    private createExistingFile(pathValue: string, fileName: string, data: string, options?: WriteFileOptions) {
         FileSystemManager.createFile(pathValue, fileName, data);
         Utils.openFile(path.join(pathValue, fileName));
     }

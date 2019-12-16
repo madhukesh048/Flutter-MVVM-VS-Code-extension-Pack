@@ -14,7 +14,9 @@ export function activate(context: vscode.ExtensionContext) {
 
 		let rootPath = vscode.workspace.rootPath;
 		if (_.isUndefined(rootPath)) { return; }
-		new Architecture(path.join(rootPath, 'lib')).init();
+		let pubPath = vscode.workspace.rootPath;
+		if (_.isUndefined(pubPath)) { return; }
+		new Architecture(path.join(rootPath, 'lib'),pubPath).init();
 		new ViewFile(rootPath, "home").createResponsiveViews();
 	});
 
