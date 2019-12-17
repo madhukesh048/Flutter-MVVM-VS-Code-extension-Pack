@@ -1,4 +1,4 @@
-import { WriteFileOptions, writeFileSync, existsSync } from "fs";
+import { WriteFileOptions, writeFileSync, existsSync, readFile, readFileSync } from "fs";
 import * as path from 'path';
 import { Utils } from './utils';
 import * as shell from "shelljs";
@@ -25,5 +25,12 @@ export class FileSystemManager {
 
     public static doesFileExist(filePath: string, fileName: string): boolean {
         return existsSync(path.join(filePath, fileName));
+    }
+
+    public static readFileAsString(filePath: string, fileName: string): string | undefined {
+        if (!this.doesFileExist(filePath, fileName)) { return undefined; }
+        let fileBuffer = readFileSync(path.join(filePath, fileName));
+        let fileData = fileBuffer.toString();
+        return fileData;
     }
 }

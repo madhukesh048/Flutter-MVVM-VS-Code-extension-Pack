@@ -6,13 +6,12 @@ import { BaseModel } from '../dart_snippets/architecture/base_model';
 import { BaseService } from '../dart_snippets/architecture/base_service';
 import { BaseViewModel } from '../dart_snippets/architecture/base_view_model';
 import { Utils } from './utils';
-import { NavigatorService } from '../dart_snippets/architecture/navigator_service';
-import { Locator } from '../dart_snippets/architecture/locator';
-import { Logger } from '../dart_snippets/architecture/logger';
-import { Providers } from '../dart_snippets/architecture/providers';
-import { Main } from '../dart_snippets/architecture/main';
-import { Pubspec } from '../dart_snippets/architecture/pubspec';
-
+import { NavigatorService } from '../dart_snippets/navigator_service';
+import { Locator } from '../dart_snippets/locator';
+import { Logger } from '../dart_snippets/logger';
+import { Providers } from '../dart_snippets/providers';
+import { Main } from '../dart_snippets/main';
+import { YamlHelper } from './yaml_helper';
 
 export class Architecture {
 
@@ -24,12 +23,8 @@ export class Architecture {
         this.initViews();
         this.initWidgets();
 
-        this.createExistingFile(this.rootPath, 'main.dart', new Main('main.dart').dartString, {
-            encoding: 'utf8', flag: 'w'
-        });
-        this.createExistingFile(this.pubPath, 'pubspec.yaml', new Pubspec('pubspec.yaml').dartString, {
-            encoding: 'utf8', flag: 'w'
-        });
+        YamlHelper.initializeWithDependencies();
+        this.createExistingFile(this.rootPath, 'main.dart', new Main('main.dart').dartString);
     }
 
     private initCore() {
