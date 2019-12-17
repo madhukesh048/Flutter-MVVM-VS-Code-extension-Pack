@@ -21,7 +21,6 @@ export class WidgetFile {
         this.createMobile();
         this.createTablet();
         this.createDesktop();
-        this.createWithViewModel();
     }
 
     public createView() {
