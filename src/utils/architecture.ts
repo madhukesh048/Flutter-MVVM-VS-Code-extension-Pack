@@ -15,7 +15,7 @@ import { YamlHelper } from './yaml_helper';
 
 export class Architecture {
 
-    constructor(private rootPath: string, private pubPath: string) { }
+    constructor(private rootPath: string) { }
 
     public init() {
         this.initCore();

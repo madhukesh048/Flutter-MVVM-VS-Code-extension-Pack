@@ -36,6 +36,14 @@ export class VsCodeActions {
         window.showErrorMessage(message);
     }
 
+    /**
+     * Display an information message in the current VsCode context
+     * @param message The message to display
+     */
+    public static showInformationMessage(message: string) {
+        window.showInformationMessage(message);
+    }
+
     public static getEditorConfiguration(): WorkspaceConfiguration {
         let configuration = workspace.getConfiguration('editor');
         return configuration;

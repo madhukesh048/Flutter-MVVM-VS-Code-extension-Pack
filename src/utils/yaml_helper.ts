@@ -1,6 +1,7 @@
 import * as yaml from 'js-yaml';
 import { VsCodeActions } from './vs_code_actions';
 import { FileSystemManager } from './file_system_manager';
+import * as _ from 'lodash';
 
 export class YamlHelper {
 
@@ -12,6 +13,23 @@ export class YamlHelper {
         this.addDependencyToPubspec('get_it', '3.0.3');
         this.addDependencyToPubspec('equatable', '1.0.1');
         this.addAssetComment();
+    }
+
+    public static isValidFlutterPubspec(): string | undefined {
+        let json = this.getPubspecJsonFile();
+        if (json === undefined) { return 'Invalid Pubspec format'; }
+        let object = JSON.parse(json);
+
+        if (object['environment'] === undefined) {
+            return 'No environment definition found';
+        }
+        if (object['dependencies'] === undefined) {
+            return 'Definition for dependencies not found';
+        } 
+        if (object['dependencies']['flutter'] === undefined) {
+            return 'Definition for FLutter in dependencies not found';
+        }
+        return undefined;
     }
 
     private static addDependencyToPubspec(module: string, version?: string) {

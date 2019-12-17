@@ -2,6 +2,8 @@ import { WriteFileOptions, writeFileSync, existsSync, readFile, readFileSync } f
 import * as path from 'path';
 import { Utils } from './utils';
 import * as shell from "shelljs";
+import { VsCodeActions } from "./vs_code_actions";
+import { YamlHelper } from "./yaml_helper";
 
 export class FileSystemManager {
     public static createFile(pathValue: string, fileName: string, data: string, options?: WriteFileOptions) {
@@ -32,5 +34,21 @@ export class FileSystemManager {
         let fileBuffer = readFileSync(path.join(filePath, fileName));
         let fileData = fileBuffer.toString();
         return fileData;
+    }
+
+    public static isFlutterProject(): boolean {
+        let rootPath = VsCodeActions.rootPath;
+        if (!existsSync(path.join(rootPath, 'pubspec.yaml'))) {
+            VsCodeActions.showErrorMessage('Pubspec.yaml not found');
+            return false;
+        }
+        let errorMessage = YamlHelper.isValidFlutterPubspec();
+        console.error(errorMessage);
+        if (errorMessage !== undefined) {
+            VsCodeActions.showErrorMessage(errorMessage);
+            return false;
+        }
+
+        return true;
     }
 }

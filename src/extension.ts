@@ -5,23 +5,23 @@ import { Utils } from './utils/utils';
 import { Architecture } from './utils/architecture';
 import { ViewFile } from './utils/view_file';
 import { VsCodeActions } from './utils/vs_code_actions';
-import { YamlHelper } from './utils/yaml_helper';
 import { WidgetFile } from './utils/widget_file';
+import { FileSystemManager } from './utils/file_system_manager';
 
 export function activate(context: vscode.ExtensionContext) {
 
 	let initializeDisposable = vscode.commands.registerCommand('extension.initilizeArchitecture', async () => {
-		vscode.window.showInformationMessage('Initializing Architecture Components');
+		if (!FileSystemManager.isFlutterProject()) { return; }
 
-		let rootPath = vscode.workspace.rootPath;
+		let rootPath = VsCodeActions.rootPath;
 		if (_.isUndefined(rootPath)) { return; }
-		let pubPath = vscode.workspace.rootPath;
-		if (_.isUndefined(pubPath)) { return; }
-		new Architecture(path.join(rootPath, 'lib'),pubPath).init();
+		new Architecture(path.join(rootPath, 'lib')).init();
 		new ViewFile(rootPath, "home").createResponsiveViews();
 	});
 
 	let viewDisposable = vscode.commands.registerCommand('extension.createViews', async () => {
+
+		if (!FileSystemManager.isFlutterProject()) { return; }
 
 		let inputString = await VsCodeActions.getInputString('Enter class name', async (value) => {
 			if (value.length === 0) {
@@ -35,7 +35,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 		if (inputString.length === 0 || inputString.toLowerCase() === 'view') {
 			console.warn("activate: inputString length is 0");
-			showError("Invalid name for file");
+			VsCodeActions.showErrorMessage("Invalid name for file");
 			return;
 		}
 
@@ -51,6 +51,8 @@ export function activate(context: vscode.ExtensionContext) {
 
 	let widgetDisposable = vscode.commands.registerCommand('extension.createWidget', async () => {
 
+		if (!FileSystemManager.isFlutterProject()) { return; }
+
 		let inputString = await VsCodeActions.getInputString('Enter class name', async (value) => {
 			if (value.length === 0) {
 				return 'Enter class name';
@@ -63,7 +65,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 		if (inputString.length === 0 || inputString.toLowerCase() === 'widget') {
 			console.warn("activate: inputString length is 0");
-			showError("Invalid name for file");
+			VsCodeActions.showErrorMessage("Invalid name for file");
 			return;
 		}
 
@@ -78,10 +80,6 @@ export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(viewDisposable);
 	context.subscriptions.push(initializeDisposable);
 	context.subscriptions.push(widgetDisposable);
-}
-
-function showError(message: string) {
-	vscode.window.showErrorMessage(message);
 }
 
 export function deactivate() { }
