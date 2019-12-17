@@ -9,6 +9,19 @@
   "categories": [
     "Other"
   ],
+  "author": {
+    "email": "madhukesh04@gmail.com",
+    "name": "Madhukesh",
+    "url": "https://github.com/madhukesh048"
+  },
+  "license": "MIT",
+  "contributors": [
+    {
+      "name": "Ajil Oommen",
+      "email": "ajilo297@gmail.com",
+      "url": "https://github.com/ajilo297"
+    }
+  ],
   "activationEvents": [
     "onCommand:extension.createViews",
     "onCommand:extension.initilizeArchitecture",
