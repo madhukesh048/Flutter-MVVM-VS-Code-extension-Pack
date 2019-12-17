@@ -2,9 +2,9 @@ import * as path from 'path';
 import * as _ from "lodash";
 import { FileSystemManager } from './file_system_manager';
 import { WriteFileOptions } from 'fs';
-import { BaseModel } from '../dart_snippets/base_model';
-import { BaseService } from '../dart_snippets/base_service';
-import { BaseViewModel } from '../dart_snippets/base_view_model';
+import { BaseModel } from '../dart_snippets/architecture/base_model';
+import { BaseService } from '../dart_snippets/architecture/base_service';
+import { BaseViewModel } from '../dart_snippets/architecture/base_view_model';
 import { Utils } from './utils';
 import { NavigatorService } from '../dart_snippets/navigator_service';
 import { Locator } from '../dart_snippets/locator';
@@ -13,10 +13,9 @@ import { Providers } from '../dart_snippets/providers';
 import { Main } from '../dart_snippets/main';
 import { YamlHelper } from './yaml_helper';
 
-
 export class Architecture {
 
-    constructor(private rootPath: string) { }
+    constructor(private rootPath: string, private pubPath: string) { }
 
     public init() {
         this.initCore();
@@ -25,10 +24,7 @@ export class Architecture {
         this.initWidgets();
 
         YamlHelper.initializeWithDependencies();
-
-        this.createFile(this.rootPath, 'main.dart', new Main('main.dart').dartString, {
-            encoding: 'utf8', flag: 'w'
-        });
+        this.createExistingFile(this.rootPath, 'main.dart', new Main('main.dart').dartString);
     }
 
     private initCore() {
@@ -92,6 +88,11 @@ export class Architecture {
             return;
         }
 
+        FileSystemManager.createFile(pathValue, fileName, data);
+        Utils.openFile(path.join(pathValue, fileName));
+    }
+
+    private createExistingFile(pathValue: string, fileName: string, data: string, options?: WriteFileOptions) {
         FileSystemManager.createFile(pathValue, fileName, data);
         Utils.openFile(path.join(pathValue, fileName));
     }

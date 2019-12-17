@@ -2,22 +2,22 @@ import * as path from 'path';
 import * as _ from 'lodash';
 import { existsSync } from 'fs';
 import { FileSystemManager } from './file_system_manager';
-import { View } from '../dart_snippets/views/view';
-import { ViewModel } from '../dart_snippets/views/view_model';
-import { Mobile } from '../dart_snippets/views/mobile';
-import { Desktop } from '../dart_snippets/views/desktop';
-import { Tablet } from '../dart_snippets/views/tablet';
+import { ViewModel } from '../dart_snippets/widgets/view_model';
+import { Mobile } from '../dart_snippets/widgets/mobile';
+import { Desktop } from '../dart_snippets/widgets/desktop';
+import { Tablet } from '../dart_snippets/widgets/tablet';
+import { Widget } from '../dart_snippets/widgets/widget';
 
-export class ViewFile {
+export class WidgetFile {
 
     constructor(private rootPath: string, private fileName: string) {
-        console.log(`ViewFile(rootPath: ${rootPath}, fileName: ${fileName})`);
+        console.log(`WidgetFile(rootPath: ${rootPath}, fileName: ${fileName})`);
         let folderCreated = FileSystemManager.createFolder(this.pathValue);
         if (!folderCreated) { return; }
     }
 
-    public createResponsiveViews() {
-        this.createFiles(this.snakeCasedFileName + '_view.dart', new View(this.snakeCasedFileName, 'View').dartString);
+    public createResponsiveWidgets() {
+        this.createFiles(this.snakeCasedFileName + '_widget.dart', new Widget(this.snakeCasedFileName, 'Widget').dartString);
         this.createMobile();
         this.createTablet();
         this.createDesktop();
@@ -54,7 +54,7 @@ export class ViewFile {
         return path.join(
             this.rootPath,
             'lib',
-            'views',
+            'widgets',
             this.snakeCasedFileName,
         );
     }

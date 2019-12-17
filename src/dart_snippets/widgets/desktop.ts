@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import {Base} from './base';
+import {Base} from '../architecture/base';
 
 export class Desktop extends Base {
 
@@ -8,7 +8,7 @@ export class Desktop extends Base {
   constructor(fileName: string, suffix: string) {
     super(fileName, suffix);
 
-    this._dartString = `part of ${fileName}_view;
+    this._dartString = `part of ${fileName}_widget;
 
 class _${this.className} extends StatelessWidget {
   @override

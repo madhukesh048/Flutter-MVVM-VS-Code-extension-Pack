@@ -14,7 +14,10 @@ export function activate(context: vscode.ExtensionContext) {
 
 		let rootPath = vscode.workspace.rootPath;
 		if (_.isUndefined(rootPath)) { return; }
-		new Architecture(path.join(rootPath, 'lib')).init();
+		let pubPath = vscode.workspace.rootPath;
+		if (_.isUndefined(pubPath)) { return; }
+		new Architecture(path.join(rootPath, 'lib'),pubPath).init();
+		new ViewFile(rootPath, "home").createResponsiveViews();
 	});
 
 	let viewDisposable = vscode.commands.registerCommand('extension.createViews', async () => {
@@ -43,8 +46,37 @@ export function activate(context: vscode.ExtensionContext) {
 		new ViewFile(rootPath, fileName).createResponsiveViews();
 	});
 
+
+
+	let widgetDisposable = vscode.commands.registerCommand('extension.createWidget', async () => {
+
+		let inputString = await VsCodeActions.getInputString('Enter class name', async (value) => {
+			if (value.length === 0) {
+				return 'Enter class name';
+			}
+			if (value.toLowerCase() === 'widget') {
+				return 'Widget is not a valid class name';
+			}
+			return undefined;
+		});
+
+		if (inputString.length === 0 || inputString.toLowerCase() === 'widget') {
+			console.warn("activate: inputString length is 0");
+			showError("Invalid name for file");
+			return;
+		}
+
+		let fileName = Utils.processFileName(inputString.trim());
+		console.log(`activate: fileName: ${fileName}`);
+
+		let rootPath = VsCodeActions.rootPath;
+		if (rootPath === undefined) { return; }
+		new WidgetFile(rootPath, fileName).createResponsiveWidgets();
+	});
+
 	context.subscriptions.push(viewDisposable);
 	context.subscriptions.push(initializeDisposable);
+	context.subscriptions.push(widgetDisposable);
 }
 
 function showError(message: string) {
