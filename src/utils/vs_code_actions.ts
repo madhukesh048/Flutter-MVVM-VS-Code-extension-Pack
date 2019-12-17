@@ -1,4 +1,4 @@
-import { window, InputBoxOptions, workspace } from 'vscode';
+import { window, InputBoxOptions, workspace, WorkspaceConfiguration } from 'vscode';
 import * as _ from 'lodash';
 
 export class VsCodeActions {
@@ -34,5 +34,11 @@ export class VsCodeActions {
      */
     public static showErrorMessage(message: string) {
         window.showErrorMessage(message);
+    }
+
+    public static getEditorConfiguration(): WorkspaceConfiguration {
+        let configuration = workspace.getConfiguration('editor');
+        return configuration;
+
     }
 }

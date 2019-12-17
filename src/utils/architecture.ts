@@ -11,6 +11,7 @@ import { Locator } from '../dart_snippets/locator';
 import { Logger } from '../dart_snippets/logger';
 import { Providers } from '../dart_snippets/providers';
 import { Main } from '../dart_snippets/main';
+import { YamlHelper } from './yaml_helper';
 
 
 export class Architecture {
@@ -22,6 +23,8 @@ export class Architecture {
         this.initTheme();
         this.initViews();
         this.initWidgets();
+
+        YamlHelper.initializeWithDependencies();
 
         this.createFile(this.rootPath, 'main.dart', new Main('main.dart').dartString, {
             encoding: 'utf8', flag: 'w'

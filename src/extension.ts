@@ -5,6 +5,7 @@ import { Utils } from './utils/utils';
 import { Architecture } from './utils/architecture';
 import { ViewFile } from './utils/view_file';
 import { VsCodeActions } from './utils/vs_code_actions';
+import { YamlHelper } from './utils/yaml_helper';
 
 export function activate(context: vscode.ExtensionContext) {
 
