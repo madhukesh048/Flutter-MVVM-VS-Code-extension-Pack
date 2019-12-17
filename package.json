@@ -1,8 +1,8 @@
 {
-  "name": "flutter-responsive-views-generator",
-  "displayName": "Flutter-Responsive-Views-Generator",
-  "description": "",
-  "version": "0.0.1",
+  "name": "flutter-mvvm-architecture-generator",
+  "displayName": "Flutter MVVM Architecture Generator",
+  "description": "VsCode extension to generate boilerplate code when using FilledStack's responsive architecture using Providers",
+  "version": "1.0.0",
   "engines": {
     "vscode": "^1.41.0"
   },
@@ -22,6 +22,9 @@
       "url": "https://github.com/ajilo297"
     }
   ],
+  "repository": {
+    "url": "https://github.com/madhukesh048/Flutter-MVVM-VS-Code-extension-Pack"
+  },
   "activationEvents": [
     "onCommand:extension.createViews",
     "onCommand:extension.initilizeArchitecture",

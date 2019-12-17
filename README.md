@@ -1,65 +1,61 @@
-# flutter-responsive-views-generator README
+# Flutter MVVM Architecture Generator
 
-This is the README for your extension "flutter-responsive-views-generator". After writing up a brief description, we recommend including the following sections.
+VsCode extension to generate boilerplate code when using [FilledStacks' responsive architecture](https://www.filledstacks.com/tutorials) using Providers
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+### Initialize Architecture
 
-For example if there is an image subfolder under your extension project workspace:
+Initialize the project with the following project structure:
 
-\!\[feature X\]\(images/feature-x.png\)
+```bash
+--root
+    |-- android
+    |-- build
+    |-- ios
+    |-- lib
+        |-- core
+            |-- base
+                |-- base_model.dart
+                |-- base_service.dart
+                |-- base_view_model.dart
+            |-- models
+            |-- services
+                |-- navigation_service.dart
+            locator.dart
+            logger.dart
+            providers.dart
+        |-- theme
+        |-- views
+            |-- home
+                |-- home_desktop.dart
+                |-- home_mobile.dart
+                |-- home_tablet.dart
+                |-- home_view_model.dart
+                |-- home_view.dart
+        |-- widgets
+        main.dart
+    |-- test
+    |-- .gitignore
+    |-- pubspec.yaml
+```
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+It will also add the following dependencies to the `pubspec.yaml` file
 
-## Requirements
+- responsive_builder: ^0.1.4
+- provider: ^3.2.0
+- logger: ^0.7.0+2
+- get_it: ^3.0.3
+- equatable: ^1.0.1
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+![Initializing the architecture](images/init.gif)
 
-## Extension Settings
+### Create View
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+The create view command will add a **View**, a **ViewModel** and the responsive variants for Tablet, Mobile and Desktop.
 
-For example:
+![Create View](images/views.gif)
 
-This extension contributes the following settings:
+### Create Widget
 
-* `myExtension.enable`: enable/disable this extension
-* `myExtension.thing`: set to `blah` to do something
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
------------------------------------------------------------------------------------------------------------
-
-## Working with Markdown
-
-**Note:** You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+CMD+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (macOS) to see a list of Markdown snippets
-
-### For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+This command will create a Widget in the `lib/widgets` folder with the initial boilerplate and responsive variants.
