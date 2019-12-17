@@ -6,6 +6,7 @@ import { Architecture } from './utils/architecture';
 import { ViewFile } from './utils/view_file';
 import { VsCodeActions } from './utils/vs_code_actions';
 import { YamlHelper } from './utils/yaml_helper';
+import { WidgetFile } from './utils/widget_file';
 
 export function activate(context: vscode.ExtensionContext) {
 
