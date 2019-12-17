@@ -1,4 +1,9 @@
-# Flutter MVVM Architecture Generator
+![Flutter Extensions](https://img.shields.io/badge/Flutter-grey?style=flat-square&logo=flutter&logoColor=blue)
+![GitHub](https://img.shields.io/github/license/madhukesh048/Flutter-MVVM-VS-Code-extension-Pack?color=blue&style=flat-square)
+![Visual Studio Marketplace Downloads](https://img.shields.io/visual-studio-marketplace/d/madhukesh040011.flutter-mvvm-architecture-generator?color=green&label=VS%20Code%20Downloads&style=flat-square)
+![Visual Studio Marketplace Rating (Stars)](https://img.shields.io/visual-studio-marketplace/stars/madhukesh040011.flutter-mvvm-architecture-generator?style=flat-square) 
+
+# Flutter MVVM Architecture Generator ![Visual Studio Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/madhukesh040011.flutter-mvvm-architecture-generator?style=flat-square)
 
 VsCode extension to generate boilerplate code when using [FilledStacks' responsive architecture](https://www.filledstacks.com/tutorials) using Providers
 
