@@ -17,7 +17,7 @@ export class WidgetFile {
     }
 
     public createResponsiveWidgets() {
-        this.createFiles(this.snakeCasedFileName + '_widget.dart', new Widget(this.fileName, 'Widget').dartString);
+        this.createFiles(this.snakeCasedFileName + '_widget.dart', new Widget(this.snakeCasedFileName, 'Widget').dartString);
         this.createMobile();
         this.createTablet();
         this.createDesktop();
@@ -29,19 +29,19 @@ export class WidgetFile {
     }
 
     public createMobile() {
-        this.createFiles(this.snakeCasedFileName + '_mobile.dart', new Mobile(this.fileName, 'Mobile').dartString);
+        this.createFiles(this.snakeCasedFileName + '_mobile.dart', new Mobile(this.snakeCasedFileName, 'Mobile').dartString);
     }
 
     public createDesktop() {
-        this.createFiles(this.snakeCasedFileName + '_desktop.dart', new Desktop(this.fileName, 'Desktop').dartString);
+        this.createFiles(this.snakeCasedFileName + '_desktop.dart', new Desktop(this.snakeCasedFileName, 'Desktop').dartString);
     }
 
     public createTablet() {
-        this.createFiles(this.snakeCasedFileName + '_tablet.dart', new Tablet(this.fileName, 'Tablet').dartString);
+        this.createFiles(this.snakeCasedFileName + '_tablet.dart', new Tablet(this.snakeCasedFileName, 'Tablet').dartString);
     }
 
     public createWithViewModel() {
-        this.createFiles(this.snakeCasedFileName + '_view_model.dart', new ViewModel(this.fileName, 'ViewModel').dartString);
+        this.createFiles(this.snakeCasedFileName + '_view_model.dart', new ViewModel(this.snakeCasedFileName, 'ViewModel').dartString);
     }
 
     private get snakeCasedFileName(): string {
