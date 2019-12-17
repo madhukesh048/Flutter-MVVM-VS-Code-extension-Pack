@@ -9,6 +9,11 @@
   "categories": [
     "Other"
   ],
+  "keywords": [
+    "flutter", "filledstacks","MVVM", "dart"
+  ],
+  "publisher": "madhukesh040011",
+  "icon": "images/flutter.png",
   "author": {
     "email": "madhukesh04@gmail.com",
     "name": "Madhukesh",
