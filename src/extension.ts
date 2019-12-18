@@ -16,7 +16,7 @@ export function activate(context: vscode.ExtensionContext) {
 		let rootPath = VsCodeActions.rootPath;
 		if (_.isUndefined(rootPath)) { return; }
 		new Architecture(path.join(rootPath, 'lib')).init();
-		new ViewFile(rootPath, "home").createResponsiveViews();
+		new ViewFile(rootPath, "home").createDemoViews();
 	});
 
 	let viewDisposable = vscode.commands.registerCommand('extension.createViews', async () => {

@@ -23,6 +23,14 @@ export class ViewFile {
         this.createDesktop();
         this.createWithViewModel();
     }
+    
+    public createDemoViews() {
+        this.createFiles(this.snakeCasedFileName + '_view.dart', new View(this.snakeCasedFileName, 'View').dartString);
+        this.createFiles(this.snakeCasedFileName + '_mobile.dart', new Mobile(this.snakeCasedFileName, 'Mobile').demoString);
+        this.createFiles(this.snakeCasedFileName + '_desktop.dart', new Desktop(this.snakeCasedFileName, 'Desktop').demoString);
+        this.createFiles(this.snakeCasedFileName + '_tablet.dart', new Tablet(this.snakeCasedFileName, 'Tablet').demoString);
+        this.createFiles(this.snakeCasedFileName + '_view_model.dart', new ViewModel(this.snakeCasedFileName, 'ViewModel').demoString);
+    }
 
     public createView() {
 

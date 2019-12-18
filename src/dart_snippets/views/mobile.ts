@@ -21,8 +21,8 @@ class _${this.className} extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text('${fileName}_mobile'),
+    return Scaffold(
+      body: Center(child: Text('${this.className}')),
     );
   }
 }`;
@@ -30,5 +30,46 @@ class _${this.className} extends StatelessWidget {
 
   get dartString(): string {
     return this._dartString;
+  }
+
+  get demoString(): string {
+    return `part of home_view;
+
+class _HomeMobile extends StatelessWidget {
+  final HomeViewModel viewModel;
+
+  _HomeMobile(this.viewModel);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Mobile'),
+        backgroundColor: Colors.black,
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              'You have pushed the button this many times: ',
+              style: TextStyle(fontSize: 14),
+            ),
+            Text(
+              '\${viewModel.counter}',
+              style: Theme.of(context).textTheme.display1,
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: viewModel.increment,
+        backgroundColor: Colors.black,
+      ),
+    );
+  }
+}
+`;
   }
 }
