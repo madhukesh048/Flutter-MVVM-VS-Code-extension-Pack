@@ -2,12 +2,13 @@
   "name": "flutter-mvvm-architecture-generator",
   "displayName": "Flutter MVVM Architecture Generator",
   "description": "VsCode extension to generate boilerplate code when using FilledStack's responsive architecture using Providers",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "engines": {
     "vscode": "^1.41.0"
   },
   "categories": [
-    "Other", "Snippets"
+    "Other",
+    "Snippets"
   ],
   "keywords": [
     "flutter",
