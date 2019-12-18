@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ## [Unreleased]
+- Create Folder if `CreateViews` command is given a parameter like `demo/login`
 
 ## [1.0.0] - 2019-12-17
 - Initial release

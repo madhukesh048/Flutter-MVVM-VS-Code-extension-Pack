@@ -7,6 +7,7 @@ export class YamlHelper {
 
     public static initializeWithDependencies() {
         this.upgradeDartVersion();
+        this.addDependencyToPubspec('provider_architecture', '1.0.3');
         this.addDependencyToPubspec('responsive_builder', '0.1.4');
         this.addDependencyToPubspec('provider', '3.2.0');
         this.addDependencyToPubspec('logger', '0.7.0+2');

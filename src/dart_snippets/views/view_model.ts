@@ -11,7 +11,6 @@ export class ViewModel extends Base {
         this._dartString = `import '../../core/base/base_view_model.dart';
 
 class ${this.className} extends BaseViewModel {
-
   ${this.className}();
   
   // Add ViewModel specific code here
