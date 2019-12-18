@@ -13,13 +13,13 @@ export class BaseService extends Base {
 import '../logger.dart';
 
 class BaseService {
-    Logger log;
+  Logger log;
 
-    BaseService({String title}) {
+  BaseService({String title}) {
     this.log = getLogger(
-        title ?? this.runtimeType.toString(),
+      title ?? this.runtimeType.toString(),
     );
-    }
+  }
 }`;
   }
 

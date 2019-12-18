@@ -11,7 +11,7 @@ export class BaseModel extends Base {
     this._dartString = `import 'package:equatable/equatable.dart';
 
 abstract class BaseModel implements Equatable {
-    Map<String, Object> toMap();
+  Map<String, Object> toMap();
 }`;
   }
 
