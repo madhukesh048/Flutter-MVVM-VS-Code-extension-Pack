@@ -40,7 +40,7 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 
 		let fileName = Utils.processFileName(inputString.trim());
-		console.log(`activate: fileName: ${fileName}`);
+		console.debug(`activate: fileName: ${fileName}`);
 
 		let rootPath = VsCodeActions.rootPath;
 		if (rootPath === undefined) { return; }
@@ -70,7 +70,7 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 
 		let fileName = Utils.processFileName(inputString.trim());
-		console.log(`activate: fileName: ${fileName}`);
+		console.debug(`activate: fileName: ${fileName}`);
 
 		let rootPath = VsCodeActions.rootPath;
 		if (rootPath === undefined) { return; }
@@ -82,4 +82,6 @@ export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(widgetDisposable);
 }
 
-export function deactivate() { }
+export function deactivate() { 
+	console.debug('Flutter MVVM Generator: Deactivated');
+}

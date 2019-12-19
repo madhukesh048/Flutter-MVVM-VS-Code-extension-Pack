@@ -11,7 +11,7 @@ import { Tablet } from '../dart_snippets/views/tablet';
 export class ViewFile {
 
     constructor(private rootPath: string, private fileName: string) {
-        console.log(`ViewFile(rootPath: ${rootPath}, fileName: ${fileName})`);
+        console.debug(`ViewFile(rootPath: ${rootPath}, fileName: ${fileName})`);
         let folderCreated = FileSystemManager.createFolder(this.pathValue);
         if (!folderCreated) { return; }
     }
@@ -54,7 +54,7 @@ export class ViewFile {
 
     private get snakeCasedFileName(): string {
         let snakeCasedFileName = _.snakeCase(this.fileName);
-        console.log(`get snakeCasedFileName: ${snakeCasedFileName}`);
+        console.debug(`get snakeCasedFileName: ${snakeCasedFileName}`);
         return snakeCasedFileName;
     }
 

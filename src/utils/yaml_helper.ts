@@ -39,7 +39,7 @@ export class YamlHelper {
         let object = JSON.parse(json);
         object['dependencies'][module] = `^${version}`;
         let modifiedString = JSON.stringify(object);
-        console.log(`addDependencyToPubspec: modifiledString: ${modifiedString}`);
+        console.debug(`addDependencyToPubspec: modifiledString: ${modifiedString}`);
         let updatedYaml = this.toYAML(modifiedString);
         if (updatedYaml === undefined) {
             return;
@@ -53,7 +53,7 @@ export class YamlHelper {
         let object = JSON.parse(json);
         object['environment']['sdk'] = '>=2.3.0 <3.0.0';
         let modifiedString = JSON.stringify(object);
-        console.log(`upgradeDartVersion: modifiledString: ${modifiedString}`);
+        console.debug(`upgradeDartVersion: modifiledString: ${modifiedString}`);
         let updatedYaml = this.toYAML(modifiedString);
         if (updatedYaml === undefined) {
             return;
@@ -122,7 +122,7 @@ export class YamlHelper {
     private static toYAML(text: string): string | undefined {
         let json;
         try {
-            console.log(`toYAML: ${text}`);
+            console.debug(`toYAML: ${text}`);
             json = JSON.parse(text);
         } catch (e) {
             VsCodeActions.showErrorMessage('Could not parse the selection as JSON.');
@@ -135,7 +135,7 @@ export class YamlHelper {
     private static toJSON(text: string) {
         let json;
         try {
-            console.log(`toJSON: ${text}`);
+            console.debug(`toJSON: ${text}`);
             json = yaml.safeLoad(text, { schema: yaml.JSON_SCHEMA });
         } catch (e) {
             VsCodeActions.showErrorMessage('Could not parse the selection as YAML.');
