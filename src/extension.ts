@@ -27,9 +27,11 @@ export function activate(context: vscode.ExtensionContext) {
 			if (value.length === 0) {
 				return 'Enter class name';
 			}
+
 			if (value.toLowerCase() === 'view') {
 				return 'View is not a valid class name';
 			}
+
 			return undefined;
 		});
 
@@ -39,12 +41,27 @@ export function activate(context: vscode.ExtensionContext) {
 			return;
 		}
 
-		let fileName = Utils.processFileName(inputString.trim());
+		console.log(`fileName: { ${inputString} }`);
+
+		let nameArray = inputString.trim().split('/');
+		let folders: string[] = [];
+		if (nameArray.length > 1) {
+			let folderList = nameArray.splice(0, nameArray.length - 1).map(element => { return element; });
+			console.log(`folderlist: { ${folderList} }`);
+			folders = folderList;
+		}
+
+		let formattedInputString = _.last(nameArray);
+		if (formattedInputString === undefined) {
+			console.error('formattedInputString is undefined');
+			return;
+		}
+		let fileName = Utils.processFileName(formattedInputString);
 		console.debug(`activate: fileName: ${fileName}`);
 
 		let rootPath = VsCodeActions.rootPath;
 		if (rootPath === undefined) { return; }
-		new ViewFile(rootPath, fileName).createResponsiveViews();
+		new ViewFile(rootPath, fileName, folders).createResponsiveViews();
 	});
 
 
@@ -82,6 +99,8 @@ export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(widgetDisposable);
 }
 
-export function deactivate() { 
+export function deactivate() {
 	console.debug('Flutter MVVM Generator: Deactivated');
 }
+
+/// [test ,splash]

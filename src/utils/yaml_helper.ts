@@ -26,11 +26,19 @@ export class YamlHelper {
         }
         if (object['dependencies'] === undefined) {
             return 'Definition for dependencies not found';
-        } 
+        }
         if (object['dependencies']['flutter'] === undefined) {
             return 'Definition for FLutter in dependencies not found';
         }
         return undefined;
+    }
+
+    public static getProjectName(): string | undefined {
+        let json = this.getPubspecJsonFile();
+        if (json === undefined) { return undefined; }
+        let object = JSON.parse(json);
+
+        return object['name'];
     }
 
     private static addDependencyToPubspec(module: string, version?: string) {
