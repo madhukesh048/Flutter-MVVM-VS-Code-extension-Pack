@@ -41,13 +41,13 @@ export function activate(context: vscode.ExtensionContext) {
 			return;
 		}
 
-		console.log(`fileName: { ${inputString} }`);
+		console.debug(`fileName: { ${inputString} }`);
 
 		let nameArray = inputString.trim().split('/');
 		let folders: string[] = [];
 		if (nameArray.length > 1) {
 			let folderList = nameArray.splice(0, nameArray.length - 1).map(element => { return element; });
-			console.log(`folderlist: { ${folderList} }`);
+			console.debug(`folderlist: { ${folderList} }`);
 			folders = folderList;
 		}
 
