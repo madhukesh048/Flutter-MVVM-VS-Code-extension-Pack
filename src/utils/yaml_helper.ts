@@ -7,6 +7,7 @@ export class YamlHelper {
 
     public static initializeWithDependencies() {
         this.upgradeDartVersion();
+        this.addDependencyToPubspec('provider_architecture', '1.0.3');
         this.addDependencyToPubspec('responsive_builder', '0.1.4');
         this.addDependencyToPubspec('provider', '3.2.0');
         this.addDependencyToPubspec('logger', '0.7.0+2');
@@ -25,11 +26,19 @@ export class YamlHelper {
         }
         if (object['dependencies'] === undefined) {
             return 'Definition for dependencies not found';
-        } 
+        }
         if (object['dependencies']['flutter'] === undefined) {
             return 'Definition for FLutter in dependencies not found';
         }
         return undefined;
+    }
+
+    public static getProjectName(): string | undefined {
+        let json = this.getPubspecJsonFile();
+        if (json === undefined) { return undefined; }
+        let object = JSON.parse(json);
+
+        return object['name'];
     }
 
     private static addDependencyToPubspec(module: string, version?: string) {
@@ -38,7 +47,7 @@ export class YamlHelper {
         let object = JSON.parse(json);
         object['dependencies'][module] = `^${version}`;
         let modifiedString = JSON.stringify(object);
-        console.log(`addDependencyToPubspec: modifiledString: ${modifiedString}`);
+        console.debug(`addDependencyToPubspec: modifiledString: ${modifiedString}`);
         let updatedYaml = this.toYAML(modifiedString);
         if (updatedYaml === undefined) {
             return;
@@ -52,7 +61,7 @@ export class YamlHelper {
         let object = JSON.parse(json);
         object['environment']['sdk'] = '>=2.3.0 <3.0.0';
         let modifiedString = JSON.stringify(object);
-        console.log(`upgradeDartVersion: modifiledString: ${modifiedString}`);
+        console.debug(`upgradeDartVersion: modifiledString: ${modifiedString}`);
         let updatedYaml = this.toYAML(modifiedString);
         if (updatedYaml === undefined) {
             return;
@@ -121,7 +130,7 @@ export class YamlHelper {
     private static toYAML(text: string): string | undefined {
         let json;
         try {
-            console.log(`toYAML: ${text}`);
+            console.debug(`toYAML: ${text}`);
             json = JSON.parse(text);
         } catch (e) {
             VsCodeActions.showErrorMessage('Could not parse the selection as JSON.');
@@ -134,7 +143,7 @@ export class YamlHelper {
     private static toJSON(text: string) {
         let json;
         try {
-            console.log(`toJSON: ${text}`);
+            console.debug(`toJSON: ${text}`);
             json = yaml.safeLoad(text, { schema: yaml.JSON_SCHEMA });
         } catch (e) {
             VsCodeActions.showErrorMessage('Could not parse the selection as YAML.');

@@ -27,6 +27,7 @@ export class Utils {
     public static openFile(filePath: string) {
         console.info(`openFile: ${filePath}`);
         let openPath = vscode.Uri.file(filePath);
+        
         vscode.workspace.openTextDocument(openPath).then((document) => {
             vscode.window.showTextDocument(document);
         });
@@ -56,7 +57,7 @@ export class Utils {
 
         if (widgetFileName === "widget") {
             let truncatedFileName = fileName.substring(0, fileName.length - 6);
-            console.log('Widget testing');
+            console.debug('Widget testing');
             return truncatedFileName.trim();
         }
 

@@ -14,8 +14,10 @@ export class View extends Base {
 
     this._dartString = `library ${fileName}_view;
 
+import 'package:provider_architecture/provider_architecture.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:flutter/material.dart';
+import '${fileName}_view_model.dart';
 
 part '${fileName}_mobile.dart';
 part '${fileName}_tablet.dart';
@@ -24,12 +26,19 @@ part '${fileName}_desktop.dart';
 class ${this.className} extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: ScreenTypeLayout(
-        mobile: _${classPrefix}Mobile(),
-        desktop: _${classPrefix}Desktop(),
-        tablet: _${classPrefix}Tablet(),
-      ),
+    ${classPrefix}ViewModel viewModel = ${classPrefix}ViewModel();
+    return ViewModelProvider<${classPrefix}ViewModel>.withConsumer(
+      viewModel: viewModel,
+      onModelReady: (viewModel) {
+        // Do something once your viewModel is initialized
+      },
+      builder: (context, viewModel, child) {
+        return ScreenTypeLayout(
+          mobile: _${classPrefix}Mobile(viewModel),
+          desktop: _${classPrefix}Desktop(viewModel),
+          tablet: _${classPrefix}Tablet(viewModel),  
+        );
+      }
     );
   }
 }`;

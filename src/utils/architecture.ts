@@ -61,25 +61,25 @@ export class Architecture {
     private initModels(corePath: string) {
         let modelsPath = path.join(corePath, 'models');
         let folderCreated = FileSystemManager.createFolder(modelsPath);
-        console.log(`FolderCreated: ${folderCreated}`);
+        console.debug(`FolderCreated: ${folderCreated}`);
     }
 
     private initTheme() {
         let themePath = path.join(this.rootPath, 'theme');
         let folderCreated = FileSystemManager.createFolder(themePath);
-        console.log(`FolderCreated: ${folderCreated}`);
+        console.debug(`FolderCreated: ${folderCreated}`);
     }
 
     private initViews() {
         let viewsPath = path.join(this.rootPath, 'views');
         let folderCreated = FileSystemManager.createFolder(viewsPath);
-        console.log(`FolderCreated: ${folderCreated}`);
+        console.debug(`FolderCreated: ${folderCreated}`);
     }
 
     private initWidgets() {
         let widgetsPath = path.join(this.rootPath, 'widgets');
         let folderCreated = FileSystemManager.createFolder(widgetsPath);
-        console.log(`FolderCreated: ${folderCreated}`);
+        console.debug(`FolderCreated: ${folderCreated}`);
     }
 
     private createFile(pathValue: string, fileName: string, data: string, options?: WriteFileOptions) {

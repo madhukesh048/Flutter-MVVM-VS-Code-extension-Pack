@@ -11,7 +11,7 @@ import { Widget } from '../dart_snippets/widgets/widget';
 export class WidgetFile {
 
     constructor(private rootPath: string, private fileName: string) {
-        console.log(`WidgetFile(rootPath: ${rootPath}, fileName: ${fileName})`);
+        console.debug(`WidgetFile(rootPath: ${rootPath}, fileName: ${fileName})`);
         let folderCreated = FileSystemManager.createFolder(this.pathValue);
         if (!folderCreated) { return; }
     }
@@ -45,7 +45,7 @@ export class WidgetFile {
 
     private get snakeCasedFileName(): string {
         let snakeCasedFileName = _.snakeCase(this.fileName);
-        console.log(`get snakeCasedFileName: ${snakeCasedFileName}`);
+        console.debug(`get snakeCasedFileName: ${snakeCasedFileName}`);
         return snakeCasedFileName;
     }
 

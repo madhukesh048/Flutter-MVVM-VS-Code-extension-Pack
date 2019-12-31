@@ -6,9 +6,9 @@ import { VsCodeActions } from "./vs_code_actions";
 import { YamlHelper } from "./yaml_helper";
 
 export class FileSystemManager {
-    public static createFile(pathValue: string, fileName: string, data: string, options?: WriteFileOptions) {
+    public static createFile(pathValue: string, fileName: string, data: string) {
         let filePath = path.join(pathValue, fileName);
-        writeFileSync(filePath, data, options);
+        writeFileSync(filePath, data);
         Utils.openFile(filePath);
     }
 
