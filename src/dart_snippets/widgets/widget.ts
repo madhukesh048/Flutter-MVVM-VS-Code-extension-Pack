@@ -24,12 +24,10 @@ part '${fileName}_desktop.dart';
 class ${this.className} extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: ScreenTypeLayout(
+    return ScreenTypeLayout(
         mobile: _${classPrefix}Mobile(),
         desktop: _${classPrefix}Desktop(),
         tablet: _${classPrefix}Tablet(),
-      ),
     );
   }
 }`;
