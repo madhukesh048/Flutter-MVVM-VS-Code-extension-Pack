@@ -22,7 +22,9 @@ class ProviderInjector {
   static List<SingleChildCloneableWidget> _independentServices = [
     Provider.value(value: locator<NavigatorService>()),
   ];
+
   static List<SingleChildCloneableWidget> _dependentServices = [];
+  
   static List<SingleChildCloneableWidget> _consumableServices = [];
 }`;
   }

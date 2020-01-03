@@ -34,7 +34,7 @@ class NavigatorService extends BaseService {
     return navigatorKey.currentState.pushReplacement(pageRoute);
   }
 
-  void pop<T>(T result) {
+  void pop<T>([T result]) {
     log.i('goBack:');
     if (navigatorKey.currentState == null) {
       log.e('goBack: Navigator State is null');
