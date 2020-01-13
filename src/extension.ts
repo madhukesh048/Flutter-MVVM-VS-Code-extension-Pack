@@ -10,7 +10,7 @@ import { FileSystemManager } from './utils/file_system_manager';
 
 export function activate(context: vscode.ExtensionContext) {
 
-	let initializeDisposable = vscode.commands.registerCommand('extension.initilizeArchitecture', async () => {
+	let initializeDisposable = vscode.commands.registerCommand('extension.initializeArchitecture', async () => {
 		if (!FileSystemManager.isFlutterProject()) { return; }
 
 		let rootPath = VsCodeActions.rootPath;
